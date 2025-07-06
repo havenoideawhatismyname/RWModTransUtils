@@ -15,11 +15,11 @@ namespace RWModTransUtils
         public static void Hook()
         {
             // 常见的remix menu套件
-            On.Menu.Remix.MixedUI.OpTab.ctor += OpTab_ctor;
+            //On.Menu.Remix.MixedUI.OpTab.ctor += OpTab_ctor;
             On.Menu.Remix.MixedUI.OpLabel.ctor_float_float_string_bool += OpLabel_ctor_float_float_string_bool;
             On.Menu.Remix.MixedUI.OpLabel.ctor_Vector2_Vector2_string_FLabelAlignment_bool_FTextParams += OpLabel_ctor_Vector2_Vector2_string_FLabelAlignment_bool_FTextParams;
-            On.ConfigurableBase.ctor += ConfigurableBase_ctor;
-            On.ConfigurableInfo.ctor += ConfigurableInfo_ctor;
+            //On.ConfigurableBase.ctor += ConfigurableBase_ctor;
+            //On.ConfigurableInfo.ctor += ConfigurableInfo_ctor;
             // 全是这些东西……
             On.Menu.Remix.MixedUI.UIelement.DisplayDescription += UIelement_DisplayDescription;
             On.Menu.Remix.MixedUI.OpCheckBox.DisplayDescription += OpCheckBox_DisplayDescription;
