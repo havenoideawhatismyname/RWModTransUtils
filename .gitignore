@@ -1,6 +1,8 @@
 ﻿### Example user template template
 ### Example user template
 
+RWModTransUtils/obj/
+
 # IntelliJ project files
 .idea
 *.iml
@@ -405,4 +407,3 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-
