@@ -37,6 +37,21 @@ namespace RWModTransUtils
             On.Menu.Remix.MixedUI.OpListBox.DisplayDescription += OpListBox_DisplayDescription;
             // 迭代器对话
             On.Conversation.TextEvent.ctor += TextEvent_ctor;
+            // HUD
+            On.HUD.TextPrompt.AddMessage_string_int_int_bool_bool += TextPrompt_AddMessage_string_int_int_bool_bool;
+            On.HUD.TextPrompt.AddMessage_string_int_int_bool_bool_float_List1 += TextPrompt_AddMessage_string_int_int_bool_bool_float_List1;
+        }
+
+        private static void TextPrompt_AddMessage_string_int_int_bool_bool_float_List1(On.HUD.TextPrompt.orig_AddMessage_string_int_int_bool_bool_float_List1 orig, HUD.TextPrompt self, string text, int wait, int time, bool darken, bool hideHud, float iconsX, List<MultiplayerUnlocks.SandboxUnlockID> iconIDs)
+        {
+            string newText = Translate(text);
+            orig.Invoke(self, newText, wait, time, darken, hideHud, iconsX, iconIDs);
+        }
+
+        private static void TextPrompt_AddMessage_string_int_int_bool_bool(On.HUD.TextPrompt.orig_AddMessage_string_int_int_bool_bool orig, HUD.TextPrompt self, string text, int wait, int time, bool darken, bool hideHud)
+        {
+            string newText = Translate(text);
+            orig.Invoke(self, newText, wait, time, darken, hideHud);
         }
 
         public static string Translate(string text)
