@@ -37,7 +37,10 @@ namespace RWModTransUtils
             On.Menu.Remix.MixedUI.OpListBox.DisplayDescription += OpListBox_DisplayDescription;
             // 迭代器对话
             On.Conversation.TextEvent.ctor += TextEvent_ctor;
-        }
+            // HUD&MENU
+            On.Menu.MenuLabel.ctor += MenuLabel_ctor;
+            On.FLabel.ctor_string_string_FTextParams += FLabel_ctor_string_string_FTextParams;
+        }       
 
         public static string Translate(string text)
         {
@@ -83,6 +86,18 @@ namespace RWModTransUtils
         {
             string newText = Translate(text);
             orig.Invoke(self, owner, initialWait, newText, textLinger);
+        }
+
+        private static void MenuLabel_ctor(On.Menu.MenuLabel.orig_ctor orig, MenuLabel self, Menu.Menu menu, MenuObject owner, string text, UnityEngine.Vector2 pos, UnityEngine.Vector2 size, bool bigText, FTextParams textParams)
+        {
+            string newText = Translate(text);
+            orig.Invoke(self, menu, owner, newText, pos, size, bigText, textParams);
+        }
+
+        private static void FLabel_ctor_string_string_FTextParams(On.FLabel.orig_ctor_string_string_FTextParams orig, FLabel self, string fontName, string text, FTextParams textParams)
+        {
+            string newText = Translate(text);
+            orig.Invoke(self, fontName, newText, textParams);
         }
 
         #region 控件描述
