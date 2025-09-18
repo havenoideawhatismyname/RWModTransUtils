@@ -8,12 +8,13 @@ using MonoMod.RuntimeDetour;
 
 namespace RWModTransUtils
 {
-	[BepInPlugin("Dreamstars.ModTranslation", " RWModTransUtils", "1.0.0")]
+	[BepInPlugin("Dreamstars.ModTranslation", "RWModTransUtils", "1.0.0")]
 	public class Plugin : BaseUnityPlugin
 	{
 		public bool inited;
+        public static RemixMenu optionsMenuInstance;
 
-		public void OnEnable()
+        public void OnEnable()
 		{
 			On.RainWorld.OnModsInit += RainWorld_OnModsInit;
 		}
@@ -22,9 +23,11 @@ namespace RWModTransUtils
 		{
 			orig.Invoke(self);
 			if (inited) return;
-			AddInGameTanslator.Hook();
+            AddInGameTanslator.Hook();
 			ApplyCRSPatch.Patch();
-			inited = true;
+            optionsMenuInstance = new RemixMenu(this);
+            MachineConnector.SetRegisteredOI("Dreamstars.ModTranslation", optionsMenuInstance);
+            inited = true;
 		}
 	}
 }

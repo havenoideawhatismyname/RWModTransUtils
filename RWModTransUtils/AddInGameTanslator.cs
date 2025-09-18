@@ -14,38 +14,38 @@ namespace RWModTransUtils
     {
         public static void Hook()
         {
-            // 常见的remix menu套件
-            //On.Menu.Remix.MixedUI.OpTab.ctor += OpTab_ctor;
-            On.Menu.Remix.MixedUI.OpLabel.ctor_float_float_string_bool += OpLabel_ctor_float_float_string_bool;
-            On.Menu.Remix.MixedUI.OpLabel.ctor_Vector2_Vector2_string_FLabelAlignment_bool_FTextParams += OpLabel_ctor_Vector2_Vector2_string_FLabelAlignment_bool_FTextParams;
-            //On.ConfigurableBase.ctor += ConfigurableBase_ctor;
-            //On.ConfigurableInfo.ctor += ConfigurableInfo_ctor;
-            // 全是这些东西……
-            On.Menu.Remix.MixedUI.UIelement.DisplayDescription += UIelement_DisplayDescription;
-            On.Menu.Remix.MixedUI.OpCheckBox.DisplayDescription += OpCheckBox_DisplayDescription;
-            On.Menu.Remix.MixedUI.OpTextBox.DisplayDescription += OpTextBox_DisplayDescription;
-            On.Menu.Remix.MixedUI.OpKeyBinder.DisplayDescription += OpKeyBinder_DisplayDescription;
-            On.Menu.Remix.MixedUI.OpFloatSlider.DisplayDescription += OpFloatSlider_DisplayDescription;
-            On.Menu.Remix.MixedUI.OpColorPicker.DisplayDescription += OpColorPicker_DisplayDescription;
-            On.Menu.Remix.MixedUI.OpComboBox.DisplayDescription += OpComboBox_DisplayDescription;
-            On.Menu.Remix.MixedUI.OpRadioButton.DisplayDescription += OpRadioButton_DisplayDescription;
-            On.Menu.Remix.MixedUI.OpSimpleButton.DisplayDescription += OpSimpleButton_DisplayDescription;
-            On.Menu.Remix.MixedUI.OpSlider.DisplayDescription += OpSlider_DisplayDescription;
-            On.Menu.Remix.MixedUI.OpDragger.DisplayDescription += OpDragger_DisplayDescription;
-            On.Menu.Remix.MixedUI.OpHoldButton.DisplayDescription += OpHoldButton_DisplayDescription;
-            On.Menu.Remix.MixedUI.OpUpdown.DisplayDescription += OpUpdown_DisplayDescription;
-            On.Menu.Remix.MixedUI.OpListBox.DisplayDescription += OpListBox_DisplayDescription;
-            // 迭代器对话
-            On.Conversation.TextEvent.ctor += TextEvent_ctor;
-            // HUD&MENU
-            On.Menu.MenuLabel.ctor += MenuLabel_ctor;
-            On.FLabel.ctor_string_string_FTextParams += FLabel_ctor_string_string_FTextParams;
+                // 常见的remix menu套件
+                //On.Menu.Remix.MixedUI.OpTab.ctor += OpTab_ctor;
+                On.Menu.Remix.MixedUI.OpLabel.ctor_float_float_string_bool += OpLabel_ctor_float_float_string_bool;
+                On.Menu.Remix.MixedUI.OpLabel.ctor_Vector2_Vector2_string_FLabelAlignment_bool_FTextParams += OpLabel_ctor_Vector2_Vector2_string_FLabelAlignment_bool_FTextParams;
+                //On.ConfigurableBase.ctor += ConfigurableBase_ctor;
+                //On.ConfigurableInfo.ctor += ConfigurableInfo_ctor;
+                // 全是这些东西……
+                On.Menu.Remix.MixedUI.UIelement.DisplayDescription += UIelement_DisplayDescription;
+                On.Menu.Remix.MixedUI.OpCheckBox.DisplayDescription += OpCheckBox_DisplayDescription;
+                On.Menu.Remix.MixedUI.OpTextBox.DisplayDescription += OpTextBox_DisplayDescription;
+                On.Menu.Remix.MixedUI.OpKeyBinder.DisplayDescription += OpKeyBinder_DisplayDescription;
+                On.Menu.Remix.MixedUI.OpFloatSlider.DisplayDescription += OpFloatSlider_DisplayDescription;
+                On.Menu.Remix.MixedUI.OpColorPicker.DisplayDescription += OpColorPicker_DisplayDescription;
+                On.Menu.Remix.MixedUI.OpComboBox.DisplayDescription += OpComboBox_DisplayDescription;
+                On.Menu.Remix.MixedUI.OpRadioButton.DisplayDescription += OpRadioButton_DisplayDescription;
+                On.Menu.Remix.MixedUI.OpSimpleButton.DisplayDescription += OpSimpleButton_DisplayDescription;
+                On.Menu.Remix.MixedUI.OpSlider.DisplayDescription += OpSlider_DisplayDescription;
+                On.Menu.Remix.MixedUI.OpDragger.DisplayDescription += OpDragger_DisplayDescription;
+                On.Menu.Remix.MixedUI.OpHoldButton.DisplayDescription += OpHoldButton_DisplayDescription;
+                On.Menu.Remix.MixedUI.OpUpdown.DisplayDescription += OpUpdown_DisplayDescription;
+                On.Menu.Remix.MixedUI.OpListBox.DisplayDescription += OpListBox_DisplayDescription;
+                // 迭代器对话
+                On.Conversation.TextEvent.ctor += TextEvent_ctor;
+                // HUD&MENU
+                On.Menu.MenuLabel.ctor += MenuLabel_ctor;
+                On.FLabel.ctor_string_string_FTextParams += FLabel_ctor_string_string_FTextParams;          
         }       
 
         public static string Translate(string text)
         {
             string text2 = Custom.rainWorld.inGameTranslator.Translate(text);
-            if (string.IsNullOrEmpty(text2) || text2 == "!NO TRANSLATION!")
+            if (string.IsNullOrEmpty(text2) || text2 == "!NO TRANSLATION!" || RemixMenu.disableAllCustomIGT.Value)
             {
                 return text;
             }
@@ -96,7 +96,7 @@ namespace RWModTransUtils
 
         private static void FLabel_ctor_string_string_FTextParams(On.FLabel.orig_ctor_string_string_FTextParams orig, FLabel self, string fontName, string text, FTextParams textParams)
         {
-            string newText = Translate(text);
+            string newText = (RemixMenu.disableFLabelIGT.Value)? text: Translate(text);
             orig.Invoke(self, fontName, newText, textParams);
         }
 
