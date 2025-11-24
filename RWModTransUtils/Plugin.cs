@@ -25,6 +25,7 @@ namespace RWModTransUtils
 			if (inited) return;
             AddInGameTanslator.Hook();
 			ApplyCRSPatch.Patch();
+			RegExModule.Apply();
             optionsMenuInstance = new RemixMenu(this);
             MachineConnector.SetRegisteredOI("Dreamstars.ModTranslation", optionsMenuInstance);
             inited = true;
